@@ -1,0 +1,73 @@
+'use strict';
+var yeoman = require('yeoman-generator');
+var chalk = require('chalk');
+var yosay = require('yosay');
+var _ = require('lodash');
+
+module.exports = yeoman.generators.Base.extend({
+
+  // TODO: quitar
+  method1: function() {
+    this.log('method 1 just ran');
+  },
+  method2: function() {
+    this.log('method 2 just ran');
+  },
+
+  // note: arguments and options should be defined in the constructor.
+  constructor: function() {
+    yeoman.Base.apply(this, arguments);
+
+    // This makes `appname` a required argument.
+    this.argument('appname', {
+      type: String,
+      required: true
+    });
+    // And you can then access it later on this way; e.g. CamelCased
+    this.appname = _.camelCase(this.appname);
+  },
+
+  initializing: function() {
+    this.log('initializing');
+  },
+
+  prompting: function() {
+    var done = this.async();
+
+    // Have Yeoman greet the user.
+    this.log(yosay(
+      'Welcome to the sweet ' + chalk.red('generator-extjs') + ' generator!'
+    ));
+
+    var prompts = [{
+      type: 'input',
+      name: 'propName',
+      message: 'Nombre del campo?'
+    },{
+      type: 'list',
+      name: 'propType',
+      choices : ['integer','string','float','double','date','object'],
+      message: 'Es de tipo:'
+    }];
+
+ this.prompt(prompts, function(props) {
+      this.props = props;
+      // To access props later use this.props.someOption;
+      this.log(props);
+      done();
+    }.bind(this));
+  },
+
+
+
+  writing: function() {
+    this.fs.copy(
+      this.templatePath('dummyfile.txt'),
+      this.destinationPath('dummyfile.txt')
+    );
+  },
+
+  install: function() {
+    this.installDependencies();
+  }
+});

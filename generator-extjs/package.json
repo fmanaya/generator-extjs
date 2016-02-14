@@ -1,0 +1,25 @@
+{
+  "name": "generator-extjs",
+  "version": "0.0.0",
+  "description": "generador de cosas para ExtJS",
+  "homepage": "",
+  "author": {
+    "name": "Felipe Martin",
+    "email": "fmanaya@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "generators"
+  ],
+  "main": "generators\\index.js",
+  "keywords": [
+    "extjs"
+  ],
+  "dependencies": {
+    "faker": "^3.0.1",
+    "gulp-beautify": "^2.0.0",
+    "gulp-jsbeautifier": "^1.0.1",
+    "lodash": "^4.1.0",
+    "yosay": "^1.1.0"
+  }
+}

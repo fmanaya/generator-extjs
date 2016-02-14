@@ -1,0 +1,19 @@
+Ext.define('<%= cName %>', {
+    extend: 'Ext.data.Model',
+    fields: [
+
+      <% for (i=0; i<=data.attrs.length-1; i++) {  %>
+        <% attr = data.attrs[i], last = i===data.attrs.length-1 %>
+        <%# segun el tipo se aplica una plantilla #%>
+        <% if (attr.type === 'date' ) { %>
+          <% console.log('una fecha-----' + i + ' ' + last) %>
+          <%- include('field/string.ejs', {attr:attr}); %>
+        <% } else { %>
+          {name: '<%=attr.name %>',  type: '<%=attr.type %>'}
+        <% } %><% if (!last) { %>,<% } %>
+
+      <% } %>
+
+//        {name: 'xxx', type: 'xxxx', defaultValue: true}
+    ]
+});
